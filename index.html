@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme | Tatuador - Traços & Sombras</title>
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navegação */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #888;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f8f8f8;
+            position: relative;
+        }
+        
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #555;
+        }
+        
+        /* Seções */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        /* Sobre */
+        .about {
+            background-color: #fff;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Portfólio */
+        .portfolio {
+            background-color: #f8f8f8;
+        }
+        
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .portfolio-filter button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .portfolio-filter button.active {
+            color: #888;
+            border-bottom: 2px solid #888;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Processo */
+        .process {
+            background-color: #fff;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 30px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+        
+        .process-step h3 {
+            margin: 20px 0;
+        }
+        
+        /* Contato */
+        .contact {
+            background-color: #f8f8f8;
+        }
+        
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 2;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #888;
+        }
+        
+        /* Modal para visualização de imagens */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header e Navegação -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">GS Tattoo</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#process">Processo</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <img src="images/minimalista-simbolo-circular.jpg" alt="Tatuagem minimalista" class="hero-image">
+        <div class="hero-content">
+            <h1>Guilherme</h1>
+            <p>Tatuador • Traços & Sombras</p>
+            <a href="#contact" class="btn">Agende sua sessão</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Me chamo Guilherme, e desenhar sempre foi meu melhor hobby. Desde que percebi isso em minha fase adulta, decidi transformar essa paixão em um trabalho artístico através da tatuagem.</p>
+                    <p>Sou um artista autodidata, constantemente aprimorando minhas habilidades através de estudos independentes, vídeos educativos e muita prática em pele artificial. Meu foco está em criar tatuagens com traços precisos e sombras delicadas, dando vida a designs minimalistas e inspirados em anime/mangá.</p>
+                    <p>Embora esteja no início da minha jornada como tatuador, tenho um compromisso sério com a higiene e segurança, seguindo rigorosamente todos os protocolos necessários para garantir uma experiência segura e confortável.</p>
+                    <p>Cada tatuagem que faço é uma oportunidade de crescimento e aprendizado, e tenho orgulho de oferecer um trabalho honesto e dedicado a cada cliente.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/1000142092.jpg" alt="Tatuagem estilo anime">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Meus Trabalhos</h2>
+            <div class="portfolio-filter">
+                <button class="active" data-filter="all">Todos</button>
+                <button data-filter="minimalista">Minimalista</button>
+                <button data-filter="anime">Anime/Mangá</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="minimalista">
+                    <img src="images/1000140550.jpg" alt="Tatuagem de símbolo circular">
+                </div>
+                <div class="portfolio-item" data-category="minimalista">
+                    <img src="images/1000155099.jpg" alt="Tatuagem de gesto de mão com coração">
+                </div>
+                <div class="portfolio-item" data-category="anime">
+                    <img src="images/1000142092.jpg" alt="Tatuagem de personagem de anime">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processo -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">Meu Processo</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <h3>1. Consulta</h3>
+                    <p>Conversamos sobre sua ideia, referências e expectativas para criar um conceito personalizado.</p>
+                </div>
+                <div class="process-step">
+                    <h3>2. Design</h3>
+                    <p>Desenvolvo o desenho com base na nossa conversa, com foco em traços e sombras que valorizam o conceito.</p>
+                </div>
+                <div class="process-step">
+                    <h3>3. Sessão</h3>
+                    <p>Realizo a tatuagem com cuidado e atenção aos detalhes, priorizando seu conforto e segurança.</p>
+                </div>
+                <div class="process-step">
+                    <h3>4. Cuidados</h3>
+                    <p>Forneço orientações detalhadas para garantir uma cicatrização adequada e o melhor resultado final.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Informações</h3>
+                    <p>Para agendar uma sessão ou tirar dúvidas, entre em contato através do WhatsApp ou preencha o formulário.</p>
+                    <p><strong>Disponibilidade:</strong> Tardes e dias de folga (variáveis)</p>
+                    <p><strong>Instagram:</strong> @gstattoo.ink</p>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">WhatsApp</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://instagram.com/gstattoo.ink" target="_blank">Instagram</a>
+            </div>
+            <p>&copy; 2025 Guilherme - Tatuador. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal para visualização de imagens -->
+    <div class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img src="" alt="Imagem ampliada">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Filtro de portfólio
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.portfolio-filter button');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Adiciona classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Modal para visualização de imagens
+            const modal = document.querySelector('.modal');
+            const modalImg = document.querySelector('.modal-content img');
+            const closeModal = document.querySelector('.close-modal');
+            
+            portfolioItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    modalImg.src = imgSrc;
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Navegação suave
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Formulário de contato
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Aqui você adicionaria a lógica para enviar o formulário
+                // Como é um exemplo, apenas mostramos um alerta
+                alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
